@@ -1,0 +1,43 @@
+package com.moviesapp.moviesapp.controllers;
+
+import com.moviesapp.moviesapp.models.Rental;
+import com.moviesapp.moviesapp.services.RentalService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
+
+@RestController
+@RequestMapping("/api/rentals")
+public class RentalController {
+
+    private final RentalService rentalService;
+
+    public RentalController(RentalService rentalService) {
+        this.rentalService = rentalService;
+    }
+
+    /**
+     * ✅ Rent a Movie
+     */
+    @PostMapping("/rent/{movieId}")
+    public Map<String, String> rentMovie(@PathVariable Long movieId) {
+        return rentalService.rentMovie(movieId);
+    }
+
+    /**
+     * ✅ Return a Movie
+     */
+    @PostMapping("/return/{movieId}")
+    public Map<String, String> returnMovie(@PathVariable Long movieId) {
+        return rentalService.returnMovie(movieId);
+    }
+
+    /**
+     * ✅ Get User Rental History
+     */
+    @GetMapping("/history")
+    public List<Rental> getRentalHistory() {
+        return rentalService.getUserRentalHistory();
+    }
+}

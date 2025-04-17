@@ -18,7 +18,7 @@ public class RentalController {
     }
 
     /**
-     * ✅ Rent a Movie
+     * Rent a Movie
      */
     @PostMapping("/rent/{movieId}")
     public Map<String, String> rentMovie(@PathVariable Long movieId) {
@@ -26,7 +26,7 @@ public class RentalController {
     }
 
     /**
-     * ✅ Return a Movie
+     * Return a Movie
      */
     @PostMapping("/return/{movieId}")
     public Map<String, String> returnMovie(@PathVariable Long movieId) {
@@ -34,7 +34,7 @@ public class RentalController {
     }
 
     /**
-     * ✅ Get User Rental History
+     * Get User Rental History
      */
     @GetMapping("/history")
     public List<Rental> getRentalHistory() {

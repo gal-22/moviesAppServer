@@ -7,6 +7,8 @@ import com.moviesapp.moviesapp.repositories.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.*;
 
 @Service
@@ -25,8 +27,9 @@ public class FavoriteService {
     }
 
     /**
-     * ✅ Add or remove a favorite movie
+     * Add or remove a favorite movie
      */
+    @Transactional
     public Map<String, String> toggleFavorite(Long movieId) {
         User user = getAuthenticatedUser();
         Optional<Movie> movie = movieRepository.findById(movieId);
@@ -49,7 +52,7 @@ public class FavoriteService {
     }
 
     /**
-     * ✅ Get all favorite movies of the user
+     * Get all favorite movies of the user
      */
     public List<Movie> getUserFavorites() {
         User user = getAuthenticatedUser();

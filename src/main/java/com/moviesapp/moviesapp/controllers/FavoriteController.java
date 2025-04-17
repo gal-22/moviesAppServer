@@ -18,7 +18,7 @@ public class FavoriteController {
     }
 
     /**
-     * ✅ Toggle favorite status of a movie
+     * Toggle favorite status of a movie
      */
     @PostMapping("/{movieId}")
     public Map<String, String> toggleFavorite(@PathVariable Long movieId) {
@@ -26,7 +26,7 @@ public class FavoriteController {
     }
 
     /**
-     * ✅ Get all favorite movies of the user
+     * Get all favorite movies of the user
      */
     @GetMapping
     public List<Movie> getFavorites() {

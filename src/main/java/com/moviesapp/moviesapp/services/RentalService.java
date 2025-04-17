@@ -9,6 +9,7 @@ import com.moviesapp.moviesapp.repositories.MovieRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -32,8 +33,9 @@ public class RentalService {
     }
 
     /**
-     * ✅ Rent a Movie
+     * Rent a Movie
      */
+    @Transactional
     public Map<String, String> rentMovie(Long movieId) {
         User user = getAuthenticatedUser();
         Optional<Movie> movie = movieRepository.findById(movieId);
@@ -53,8 +55,9 @@ public class RentalService {
     }
 
     /**
-     * ✅ Return a Movie
+     * Return a Movie
      */
+    @Transactional
     public Map<String, String> returnMovie(Long movieId) {
         User user = getAuthenticatedUser();
         Optional<Movie> movie = movieRepository.findById(movieId);
@@ -76,7 +79,7 @@ public class RentalService {
     }
 
     /**
-     * ✅ Get Rental History for a User
+     * Get Rental History for a User
      */
     public List<Rental> getUserRentalHistory() {
         User user = getAuthenticatedUser();

@@ -18,7 +18,7 @@ public class AuthController {
     }
 
     /**
-     * ✅ Register a new user
+     * Register a new user
      */
     @PostMapping("/register")
     public Map<String, String> registerUser(@RequestBody User user) {
@@ -26,7 +26,7 @@ public class AuthController {
     }
 
     /**
-     * ✅ Login user and return JWT token
+     * Login user and return JWT token
      */
     @PostMapping("/login")
     public Map<String, Object> loginUser(@RequestBody Map<String, String> loginRequest) {

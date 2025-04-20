@@ -44,7 +44,7 @@ public class RentalService {
             return Map.of("message", "Error: Movie not found");
         }
 
-        if (rentalRepository.findByUserAndMovieAndReturnDateIsNull(user, movie.get()).isPresent()) {
+        if (rentalRepository.findFirstByUserAndMovieAndReturnDateIsNull(user, movie.get()).isPresent()) {
             return Map.of("message", "Error: You have already rented this movie");
         }
 
@@ -66,7 +66,7 @@ public class RentalService {
             return Map.of("message", "Error: Movie not found");
         }
 
-        Optional<Rental> rental = rentalRepository.findByUserAndMovieAndReturnDateIsNull(user, movie.get());
+        Optional<Rental> rental = rentalRepository.findFirstByUserAndMovieAndReturnDateIsNull(user, movie.get());
 
         if (rental.isEmpty()) {
             return Map.of("message", "Error: You have not rented this movie");

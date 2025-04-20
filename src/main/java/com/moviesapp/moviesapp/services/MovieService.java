@@ -38,7 +38,7 @@ public class MovieService {
 
         for (Movie movie : movies) {
             boolean isRentedByAnyone = !rentalRepository.findByMovieAndReturnDateIsNull(movie).isEmpty();
-            boolean isRentedByUser = rentalRepository.findByUserAndMovieAndReturnDateIsNull(user, movie).isPresent();
+            boolean isRentedByUser = rentalRepository.findFirstByUserAndMovieAndReturnDateIsNull(user, movie).isPresent();
             boolean isFavorite = user.getFavoriteMovies().contains(movie);
 
             MovieView movieData = new MovieView(

@@ -9,6 +9,6 @@ import java.util.Optional;
 
 public interface RentalRepository extends JpaRepository<Rental, Long> {
     List<Rental> findByUser(User user);
-    Optional<Rental> findByUserAndMovieAndReturnDateIsNull(User user, Movie movie);
+    Optional<Rental> findFirstByUserAndMovieAndReturnDateIsNull(User user, Movie movie);
     List<Rental> findByMovieAndReturnDateIsNull(Movie movie);
 }

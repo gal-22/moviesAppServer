@@ -1,6 +1,6 @@
 package com.moviesapp.moviesapp.controllers;
 
-import com.moviesapp.moviesapp.models.MovieView;
+import com.moviesapp.moviesapp.dto.MovieView;
 import com.moviesapp.moviesapp.services.MovieFetchService;
 import com.moviesapp.moviesapp.services.MovieService;
 import org.springframework.http.ResponseEntity;
@@ -25,10 +25,12 @@ public class MovieController {
         return movieService.getAllMovies();
     }
 
+    /*
+       Demo Function, used to fetch movies and populate the DB. These movies will represent the DVDs
+     */
     @PostMapping("/refetch")
     public ResponseEntity<?> fetchMoviesFromTMDB() {
         Map<String, String> response = new HashMap<>();
-
         try {
             movieFetchService.fetchAndStoreMovies();
             response.put("message", "Movies fetched and updated successfully!");

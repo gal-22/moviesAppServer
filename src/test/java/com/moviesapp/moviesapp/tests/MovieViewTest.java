@@ -1,7 +1,7 @@
 package com.moviesapp.moviesapp.tests;
 
 import com.moviesapp.moviesapp.models.Movie;
-import com.moviesapp.moviesapp.models.MovieView;
+import com.moviesapp.moviesapp.dto.MovieView;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

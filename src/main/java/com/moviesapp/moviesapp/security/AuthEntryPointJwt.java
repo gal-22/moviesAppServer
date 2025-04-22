@@ -12,6 +12,7 @@ import java.io.IOException;
 @Component
 public class AuthEntryPointJwt implements AuthenticationEntryPoint {
 
+    // This function is called whenever there is an unauthorized request.
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException authException) throws IOException, ServletException {

@@ -19,14 +19,27 @@ import java.io.IOException;
 @Component
 public class JwtAuthFilter extends OncePerRequestFilter {
 
-    private final JwtUtil jwtUtil;
-    private final UserDetailsService userDetailsService;
+    private final JwtUtil jwtUtil; // parse and verify the JWT.
+    private final UserDetailsService userDetailsService; // loads the user’s details based on the username extracted from the token.
 
     public JwtAuthFilter(JwtUtil jwtUtil, UserDetailsService userDetailsService) {
         this.jwtUtil = jwtUtil;
         this.userDetailsService = userDetailsService;
     }
 
+    /*
+method is invoked on every incoming HTTP request (once per request) and handles extracting and validating
+     a JWT before Spring Security makes any access‑control decisions.
+
+Skips authentication for any URI under /api/auth/ so that login/signup endpoints remain publicly accessible.
+
+Reads the Authorization: Bearer <token> header, and if present, removed the Bearer and returns Raw JWT
+
+Parses the username from the token via JwtUtil; if no authentication is already set in the SecurityContext.
+
+Handles errors by catching expired or malformed JWT exceptions and immediately sending back a 401 status with an explanatory message of expired token.
+
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {

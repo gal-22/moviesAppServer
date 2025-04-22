@@ -1,4 +1,6 @@
-package com.moviesapp.moviesapp.models;
+package com.moviesapp.moviesapp.dto;
+
+import com.moviesapp.moviesapp.models.Movie;
 
 public class MovieView extends Movie {
     private boolean isRented;

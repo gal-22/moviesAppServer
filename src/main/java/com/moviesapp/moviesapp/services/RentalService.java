@@ -1,5 +1,6 @@
 package com.moviesapp.moviesapp.services;
 
+import com.moviesapp.moviesapp.dto.MovieView;
 import com.moviesapp.moviesapp.models.Rental;
 import com.moviesapp.moviesapp.models.User;
 import com.moviesapp.moviesapp.models.Movie;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class RentalService {
@@ -85,4 +87,39 @@ public class RentalService {
         User user = getAuthenticatedUser();
         return rentalRepository.findByUser(user);
     }
+
+    public List<MovieView> getUserRentalHistoryMovies() {
+        User currentUser = getAuthenticatedUser();
+
+        return getUserRentalHistory().stream()
+                .map(rental -> {
+                    // the movie on this rental record
+                    Movie movie = rental.getMovie();
+
+                    // 1) is it currently rented by *anyone*?
+                    boolean isRentedByAnyone =
+                            !rentalRepository
+                                    .findByMovieAndReturnDateIsNull(movie)
+                                    .isEmpty();
+
+                    // is it your own active rental?
+                    boolean isRentedByUser =
+                            rentalRepository
+                                    .findFirstByUserAndMovieAndReturnDateIsNull(currentUser, movie)
+                                    .isPresent();
+
+                    // is it in your favorites?
+                    boolean isFav =
+                            currentUser.getFavoriteMovies().contains(movie);
+
+                    return new MovieView(
+                            movie,
+                            isRentedByAnyone,
+                            isRentedByUser,
+                            isFav
+                    );
+                })
+                .collect(Collectors.toList());
+    }
+
 }

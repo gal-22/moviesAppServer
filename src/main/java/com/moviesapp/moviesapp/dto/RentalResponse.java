@@ -1,6 +1,5 @@
 package com.moviesapp.moviesapp.dto;
 
-import com.moviesapp.moviesapp.models.MovieView;
 import com.moviesapp.moviesapp.models.Rental;
 import com.moviesapp.moviesapp.models.User;
 

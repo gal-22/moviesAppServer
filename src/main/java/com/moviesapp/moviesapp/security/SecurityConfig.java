@@ -26,7 +26,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // Disable CSRF for simplicity (adjust if needed)
+                // Disable CSRF for simplicity
                 .csrf(csrf -> csrf.disable())
                 // Set the entry point for unauthorized requests
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))

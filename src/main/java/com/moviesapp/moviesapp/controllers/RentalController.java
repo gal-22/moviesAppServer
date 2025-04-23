@@ -14,15 +14,11 @@ import java.util.Map;
 @RequestMapping("/api/rentals")
 public class RentalController {
 
-    private final RentalService rentalService;
-    private final UserRepository userRepository;
-    private final RentalRepository rentalRepository;  // ← new
+    private final RentalService rentalService;// ← new
 
     public RentalController(RentalService rentalService,
                             UserRepository userRepository, RentalRepository rentalRepository) {
         this.rentalService = rentalService;
-        this.userRepository = userRepository;
-        this.rentalRepository = rentalRepository;
     }
 
     /**
